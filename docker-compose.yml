@@ -10,6 +10,8 @@ services:
     environment:
       - NODE_ENV=development
       - APP_PORT=3003
+    depends_on:
+      - postgres
 
   mongo:
     image: mongo:latest
