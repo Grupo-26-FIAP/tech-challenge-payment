@@ -1,16 +1,16 @@
-import { DynamicModule, Module } from "@nestjs/common";
-import { ConfigModule, ConfigModuleOptions } from "@nestjs/config";
-import * as Joi from "joi";
-import { EnvironmentVariableService } from "./environment-variable.service";
+import { DynamicModule, Module } from '@nestjs/common';
+import { ConfigModule, ConfigModuleOptions } from '@nestjs/config';
+import * as Joi from 'joi';
+import { EnvironmentVariableService } from './environment-variable.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ".env",
+      envFilePath: '.env',
       validationSchema: Joi.object({
         NODE_ENV: Joi.string()
-          .valid("test", "development", "staging", "production")
+          .valid('test', 'development', 'staging', 'production')
           .required(),
         APP_NAME: Joi.string().required(),
         APP_PORT: Joi.number().default(3000),
@@ -21,11 +21,9 @@ import { EnvironmentVariableService } from "./environment-variable.service";
         POSTGRES_DB: Joi.string().required(),
         POSTGRES_USER: Joi.string().required(),
         POSTGRES_PASSWORD: Joi.string().required(),
-        USER_TOKEN_SECRET: Joi.string().required(),
-        USER_TOKEN_EXPIRES_IN: Joi.number().required(),
       }),
       validationOptions: {
-        presence: "required",
+        presence: 'required',
         allowUnknown: true,
         abortEarly: false,
       },
