@@ -2,7 +2,7 @@ import { CreateCheckoutRequestDto } from '@Application/dtos/request/payment/crea
 import { PaymentNotificationDto } from '@Application/dtos/request/payment/payment-notification.request.dto';
 import { CheckoutResponseDto } from '@Application/dtos/response/payment/checkout.response';
 import { CheckoutUseCase } from '@Application/use-cases/payment/checkout.use-case';
-import { WebhookUseCase } from '@Application/use-cases/payment/webhook.use-case';
+import { PaymentNotificationUseCase } from '@Application/use-cases/payment/payment-notification.use-case';
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -11,7 +11,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class PaymentController {
   constructor(
     private readonly checkoutUseCase: CheckoutUseCase,
-    private readonly webhookUseCase: WebhookUseCase,
+    private readonly paymentNotificationUseCase: PaymentNotificationUseCase,
   ) {}
 
   @Post()
@@ -30,7 +30,7 @@ export class PaymentController {
   }
 
   @HttpCode(200)
-  @Post('/webhook')
+  @Post('/payment-notification')
   @ApiOperation({
     summary: 'Recebe o Callback da API de pagamento',
   })
@@ -40,6 +40,6 @@ export class PaymentController {
   })
   @ApiResponse({ status: 500, description: 'Erro interno do servidor' })
   async create(@Body() dto: PaymentNotificationDto) {
-    this.webhookUseCase.execute(dto);
+    this.paymentNotificationUseCase.execute(dto);
   }
 }

@@ -6,7 +6,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { EnvironmentVariableService } from '@Shared/config/environment-variable/environment-variable.service';
 import { lastValueFrom } from 'rxjs';
-import { IPaymentService } from './payment.service';
+import { IPaymentService } from '../../../domain/services/payment.service';
 
 @Injectable()
 export class MercadoPagoServiceImpl implements IPaymentService {
