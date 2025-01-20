@@ -1,6 +1,5 @@
 import { CreateCheckoutRequestDto } from '@Application/dtos/request/payment/create-checkout.dto';
 import { CheckoutResponseDto } from '@Application/dtos/response/payment/checkout.response';
-import { PaymentMapper } from '@Application/mappers/payment.mapper';
 import { IPaymentService } from '@Domain/services/payment.service';
 import { Inject, Injectable } from '@nestjs/common';
 
@@ -12,9 +11,11 @@ export class CheckoutUseCase {
   ) {}
 
   async execute(dto: CreateCheckoutRequestDto): Promise<CheckoutResponseDto> {
-    const payment = PaymentMapper.ToPaymentRequestDto(
-      this.paymentService.getNotificationUrl(),
-    );
-    return await this.paymentService.createPayment(payment);
+    // const payment = PaymentMapper.ToPaymentRequestDto(
+    //   this.paymentService.getNotificationUrl(),
+    // );
+    // return await this.paymentService.createPayment(payment);
+
+    return new CheckoutResponseDto();
   }
 }

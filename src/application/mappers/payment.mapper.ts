@@ -1,26 +1,31 @@
-import { PaymentRequestDto } from '@Application/dtos/request/payment/payment.request.dto';
+import {
+  PaymentRequestDto,
+  ProductItem,
+} from '@Application/dtos/request/payment/payment.request.dto';
+import { OrderCreatedEvent } from '@Domain/events/order-created.event';
 
 export class PaymentMapper {
-  static ToPaymentRequestDto(notificationUrl: string): PaymentRequestDto {
-    // const payment = new PaymentRequestDto();
-    // payment.external_reference = order.id.toString();
-    // payment.title = `Pedido - ${order.id}`;
-    // payment.description = `Combo de lanches`;
-    // payment.notification_url = notificationUrl;
-    // payment.total_amount = order.totalPrice.getValue();
-    // payment.items = order.productsOrder.map((productOrder) => {
-    //   const item = new ProductItem();
-    //   item.description = productOrder.product.description;
-    //   item.title = productOrder.product.name;
-    //   item.quantity = 1;
-    //   item.category = 'marketplace';
-    //   item.unit_measure = 'unit';
-    //   item.unit_price = Number(productOrder.product.price);
-    //   item.total_amount = Number(productOrder.product.price);
-    //   return item;
-    // });
-    // return payment;
-
-    return new PaymentRequestDto();
+  static EventToPaymentRequestDto(
+    event: OrderCreatedEvent,
+    notificationUrl: string,
+  ): PaymentRequestDto {
+    const payment = new PaymentRequestDto();
+    payment.external_reference = event.id.toString();
+    payment.title = `Pedido - ${event.id}`;
+    payment.description = `Combo de lanches`;
+    payment.notification_url = notificationUrl;
+    payment.total_amount = event.totalPrice;
+    payment.items = event.orderItems.map((orderItem) => {
+      const item = new ProductItem();
+      item.description = orderItem.productId.toString(); //temporário
+      item.title = orderItem.productId.toString(); //temporário
+      item.quantity = orderItem.quantity;
+      item.category = 'marketplace'; //temporário
+      item.unit_measure = 'unit';
+      item.unit_price = Number(orderItem.price);
+      item.total_amount = Number(orderItem.price);
+      return item;
+    });
+    return payment;
   }
 }
