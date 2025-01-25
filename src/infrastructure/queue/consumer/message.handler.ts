@@ -1,31 +1,30 @@
-import { PaymentMapper } from '@Application/mappers/payment.mapper';
-import { Injectable } from '@nestjs/common';
+import { OrderResponseDto } from '@Application/dtos/response/order/order.response.dto';
+import { CheckoutUseCase } from '@Application/use-cases/payment/checkout.use-case';
+import { Inject, Injectable } from '@nestjs/common';
 import { SqsMessageHandler } from '@ssut/nestjs-sqs';
 import * as AWS from 'aws-sdk';
 
 @Injectable()
 export class MessageHandler {
   private sqs: AWS.SQS;
-  constructor() {
+  constructor(
+    @Inject(CheckoutUseCase)
+    private readonly chackoutUseCase: CheckoutUseCase,
+  ) {
     this.sqs = new AWS.SQS();
   }
 
   @SqsMessageHandler('order-created-queue', false)
   async handleMessage(message: AWS.SQS.Message) {
-    const data = JSON.parse(message.Body);
+    const data = JSON.parse(message.Body) as OrderResponseDto;
 
-    console.log({ data: data });
+    console.log('Message received', data);
 
-    const payment = PaymentMapper.EventToPaymentRequestDto(
-      data,
-      'http://example.com',
-    );
-
-    console.log(payment);
+    this.chackoutUseCase.execute(data);
 
     await this.sqs
       .deleteMessage({
-        QueueUrl: process.env.QUEUE_URL,
+        QueueUrl: process.env.ORDER_QUEUE_NAME,
         ReceiptHandle: message.ReceiptHandle,
       })
       .promise();

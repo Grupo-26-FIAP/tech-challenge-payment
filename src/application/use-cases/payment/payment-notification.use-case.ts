@@ -24,8 +24,6 @@ export class PaymentNotificationUseCase {
       const { status, order_status } = merchantOrder;
       const paymentReceived = status === 'closed' && order_status === 'paid';
       console.log(paymentReceived);
-
-      // Notifica Pagamento Recebido
     }
   }
 
