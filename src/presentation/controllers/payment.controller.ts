@@ -1,7 +1,9 @@
 import { PaymentNotificationDto } from '@Application/dtos/request/payment/payment-notification.request.dto';
 import { CheckoutUseCase } from '@Application/use-cases/payment/checkout.use-case';
+import { FindCheckoutUseCase } from '@Application/use-cases/payment/find-checkout.use-case';
 import { PaymentNotificationUseCase } from '@Application/use-cases/payment/payment-notification.use-case';
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { CheckoutOrder } from '@Infrastructure/typeorm/models/checkout.model';
+import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Payment')
@@ -9,23 +11,20 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class PaymentController {
   constructor(
     private readonly checkoutUseCase: CheckoutUseCase,
+    private readonly findCheckout: FindCheckoutUseCase,
     private readonly paymentNotificationUseCase: PaymentNotificationUseCase,
   ) {}
 
-  // @Post()
-  // @ApiOperation({ summary: 'Inicia um checkout e retorna a chave pix' })
-  // @ApiResponse({
-  //   status: 201,
-  //   description: 'Checkout feito com sucesso',
-  //   type: CheckoutResponseDto,
-  // })
-  // @ApiResponse({ status: 400, description: 'Dados inválidos' })
-  // @ApiResponse({ status: 500, description: 'Erro interno do servidor' })
-  // async checkout(
-  //   @Body() dto: CreateCheckoutRequestDto,
-  // ): Promise<CheckoutResponseDto> {
-  //   return this.checkoutUseCase.execute(dto);
-  // }
+  @Get('/checkout/:orderId')
+  @ApiResponse({
+    status: 200,
+    description: 'Checkout feito com sucesso',
+    type: CheckoutOrder,
+  })
+  @ApiResponse({ status: 500, description: 'Erro interno do servidor' })
+  async checkout(@Param('orderId') orderId: number): Promise<CheckoutOrder> {
+    return this.findCheckout.execute(orderId);
+  }
 
   @HttpCode(200)
   @Post('/payment-notification')

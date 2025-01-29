@@ -10,4 +10,7 @@ export class CheckoutOrder {
 
   @Column()
   qr_data: string;
+
+  @Column()
+  order_id: number;
 }

@@ -3,6 +3,8 @@ import { CheckoutUseCase } from '@Application/use-cases/payment/checkout.use-cas
 import { Inject, Injectable } from '@nestjs/common';
 import { SqsMessageHandler } from '@ssut/nestjs-sqs';
 import * as AWS from 'aws-sdk';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Injectable()
 export class MessageHandler {
@@ -24,9 +26,12 @@ export class MessageHandler {
 
     await this.sqs
       .deleteMessage({
-        QueueUrl: process.env.ORDER_QUEUE_NAME,
+        QueueUrl: process.env.ORDER_QUEUE_URL,
         ReceiptHandle: message.ReceiptHandle,
       })
-      .promise();
+      .promise()
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

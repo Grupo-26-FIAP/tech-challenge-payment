@@ -30,6 +30,7 @@ export class CheckoutUseCase {
     await this.checkoutOrderService.save({
       in_store_order_id: checkout.in_store_order_id,
       qr_data: checkout.qr_data,
+      order_id: dto.id,
     });
 
     return checkout;

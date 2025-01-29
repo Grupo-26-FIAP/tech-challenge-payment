@@ -1,4 +1,5 @@
 import { CheckoutUseCase } from '@Application/use-cases/payment/checkout.use-case';
+import { FindCheckoutUseCase } from '@Application/use-cases/payment/find-checkout.use-case';
 import { PaymentNotificationUseCase } from '@Application/use-cases/payment/payment-notification.use-case';
 import { CheckoutRepository } from '@Domain/repositories/checkout.repository';
 import { CheckoutOrderService } from '@Domain/services/checkout.service.impl';
@@ -32,6 +33,7 @@ import { PaymentController } from './presentation/controllers/payment.controller
   providers: [
     PaymentNotificationUseCase,
     CheckoutUseCase,
+    FindCheckoutUseCase,
     {
       provide: IPaymentService,
       useClass: MercadoPagoServiceImpl,

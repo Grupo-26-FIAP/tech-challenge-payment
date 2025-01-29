@@ -14,16 +14,16 @@ export class PaymentMapper {
     payment.title = `Pedido - ${dto.id}`;
     payment.description = `Combo de lanches`;
     payment.notification_url = notificationUrl;
-    payment.total_amount = 10;
+    payment.total_amount = dto.totalPrice;
     payment.items = dto.productOrders.map((orderItem) => {
       const item = new ProductItem();
-      item.description = orderItem.productId.toString(); //temporário
-      item.title = orderItem.productId.toString(); //temporário
-      item.quantity = orderItem.quantity;
+      item.description = orderItem.id.toString(); //temporário
+      item.title = orderItem.description.toString(); //temporário
+      item.quantity = 1;
       item.category = 'marketplace'; //temporário
       item.unit_measure = 'unit';
-      item.unit_price = 10;
-      item.total_amount = 10;
+      item.unit_price = Number(orderItem.price);
+      item.total_amount = Number(orderItem.price);
       return item;
     });
     return payment;
