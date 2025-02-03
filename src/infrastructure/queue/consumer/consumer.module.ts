@@ -18,6 +18,7 @@ AWS.config.update({
   region: process.env.AWS_REGION,
   accessKeyId: process.env.ACCESS_KEY_ID,
   secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  sessionToken: process.env.SESSION_TOKEN,
 });
 
 console.log({ ORDER_QUEUE_URL: process.env.ORDER_QUEUE_URL });
@@ -29,7 +30,7 @@ console.log({ ORDER_QUEUE_NAME: process.env.ORDER_QUEUE_NAME });
     SqsModule.register({
       consumers: [
         {
-          name: 'order-created-queue',
+          name: process.env.ORDER_QUEUE_NAME,
           queueUrl: process.env.ORDER_QUEUE_URL,
           region: process.env.AWS_REGION,
         },

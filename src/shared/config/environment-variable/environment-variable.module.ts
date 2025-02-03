@@ -16,11 +16,7 @@ import { EnvironmentVariableService } from './environment-variable.service';
         APP_PORT: Joi.number().default(3000),
         APP_VERSION: Joi.string().required(),
         APP_DOCUMENTATION_ENDPOINT: Joi.string().required(),
-        MONGO_PORT: Joi.number().default(5432),
         MONGO_HOST: Joi.string().required(),
-        MONGO_DB: Joi.string().required(),
-        MONGO_USER: Joi.string().required(),
-        MONGO_PASSWORD: Joi.string().required(),
       }),
       validationOptions: {
         presence: 'required',

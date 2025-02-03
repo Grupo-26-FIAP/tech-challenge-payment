@@ -1,5 +1,4 @@
 import { PaymentNotificationDto } from '@Application/dtos/request/payment/payment-notification.request.dto';
-import { CheckoutUseCase } from '@Application/use-cases/payment/checkout.use-case';
 import { FindCheckoutUseCase } from '@Application/use-cases/payment/find-checkout.use-case';
 import { PaymentNotificationUseCase } from '@Application/use-cases/payment/payment-notification.use-case';
 import { CheckoutOrder } from '@Infrastructure/typeorm/models/checkout.model';
@@ -10,7 +9,6 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 @Controller('/api/payment')
 export class PaymentController {
   constructor(
-    private readonly checkoutUseCase: CheckoutUseCase,
     private readonly findCheckout: FindCheckoutUseCase,
     private readonly paymentNotificationUseCase: PaymentNotificationUseCase,
   ) {}

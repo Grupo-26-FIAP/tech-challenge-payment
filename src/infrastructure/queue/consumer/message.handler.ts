@@ -16,7 +16,7 @@ export class MessageHandler {
     this.sqs = new AWS.SQS();
   }
 
-  @SqsMessageHandler('order-created-queue', false)
+  @SqsMessageHandler(process.env.ORDER_QUEUE_NAME, false)
   async handleMessage(message: AWS.SQS.Message) {
     const data = JSON.parse(message.Body) as OrderResponseDto;
 

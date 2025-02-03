@@ -9,11 +9,10 @@ export class MongoConfigService implements TypeOrmOptionsFactory {
   ) {}
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
-    //const mongoEnvs = this.environmentVariableService.mongoConfig;
-
+    const mongoEnvs = this.environmentVariableService.mongoConfig;
     return {
       type: 'mongodb',
-      url: 'mongodb://root:root@localhost:27017/tech-challenge-payment-db?authSource=admin',
+      url: mongoEnvs.host,
       synchronize: true,
       autoLoadEntities: true,
       useUnifiedTopology: true,
