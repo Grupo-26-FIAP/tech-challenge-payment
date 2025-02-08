@@ -2,8 +2,7 @@ name: Continuos Deployment
 on:
   push:
     branches:
-      - main
-      
+      - main  
 env:
   REGION_DEFAULT: us-east-1
   CLUSTER_NAME: tech-challenge-eks
