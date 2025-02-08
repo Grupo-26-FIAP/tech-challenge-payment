@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main  
+  workflow_dispatch:
+    
 env:
   REGION_DEFAULT: us-east-1
   CLUSTER_NAME: tech-challenge-eks
