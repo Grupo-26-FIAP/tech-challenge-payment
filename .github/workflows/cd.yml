@@ -51,13 +51,13 @@ jobs:
       - name: Create Secret
         run: |
           kubectl create secret generic tech-challenge-payment-secrets \
-            --from-literal=MERCADO_PAGO_EXTERNAL_POS_ID=${{ secrets.MERCADO_PAGO_EXTERNAL_POS_ID }} \
-            --from-literal=MONGO_HOST=${{ secrets.MONGO_HOST }} \
             --from-literal=AWS_REGION=${{ secrets.AWS_REGION }} \
             --from-literal=ACCESS_KEY_ID=${{ secrets.ACCESS_KEY_ID }} \
             --from-literal=SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }} \
             --from-literal=SESSION_TOKEN=${{ secrets.SESSION_TOKEN }} \
             --from-literal=MERCADO_PAGO_TOKEN=${{ secrets.MERCADO_PAGO_TOKEN }} \
+            --from-literal=MERCADO_PAGO_EXTERNAL_POS_ID=${{ secrets.MERCADO_PAGO_EXTERNAL_POS_ID }} \
+            --from-literal=MONGO_HOST=${{ secrets.MONGO_HOST }} \
             --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Kube Apply
