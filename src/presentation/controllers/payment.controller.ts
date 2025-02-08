@@ -6,7 +6,7 @@ import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Payment')
-@Controller('/api/payment')
+@Controller('/payments')
 export class PaymentController {
   constructor(
     private readonly findCheckout: FindCheckoutUseCase,

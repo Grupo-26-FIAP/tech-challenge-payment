@@ -10,8 +10,9 @@ import { MercadoPagoServiceImpl } from '@Infrastructure/services/mercadopago/mer
 import { MongoConfigService } from '@Infrastructure/typeorm/config/mongo.config.service';
 import { CheckoutOrder } from '@Infrastructure/typeorm/models/checkout.model';
 import { EnvironmentVariableModule } from '@Shared/config/environment-variable/environment-variable.module';
+import { ResponseMiddleware } from '@Shared/middlewares/response.middleware';
 import { HttpModule } from '@nestjs/axios';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TerminusModule } from '@nestjs/terminus';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PaymentController } from './presentation/controllers/payment.controller';
@@ -42,4 +43,8 @@ import { PaymentController } from './presentation/controllers/payment.controller
     CheckoutRepository,
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(ResponseMiddleware).forRoutes('*'); // Apply the middleware to all routes
+  }
+}

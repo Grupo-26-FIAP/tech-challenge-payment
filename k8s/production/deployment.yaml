@@ -14,7 +14,6 @@ spec:
       containers:
       - name: tech-challenge-payment
         image:  diname/tech-challenge-payment:latest
-        imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
             name: tech-challenge-payment-general-settings
