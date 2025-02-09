@@ -2,9 +2,9 @@ name: Continuos Deployment
 on:
   push:
     branches:
-      - main  
+      - main
   workflow_dispatch:
-    
+
 env:
   REGION_DEFAULT: us-east-1
   CLUSTER_NAME: tech-challenge-eks
@@ -61,9 +61,8 @@ jobs:
             --from-literal=MERCADO_PAGO_EXTERNAL_POS_ID=${{ secrets.MERCADO_PAGO_EXTERNAL_POS_ID }} \
             --from-literal=MERCADO_PAGO_USER_ID=${{ secrets.MERCADO_PAGO_USER_ID }} \
             --from-literal=MONGO_HOST=${{ secrets.MONGO_HOST }} \
-            --from-literal=MERCADO_PAGO_NOTIFICATION_URL=${{ vars.MERCADO_PAGO_NOTIFICATION_URL }}
+            --from-literal=MERCADO_PAGO_NOTIFICATION_URL="${{ vars.MERCADO_PAGO_NOTIFICATION_URL }}"
 
- 
       - name: Kube Apply
         run: |
           kubectl apply -f k8s/production/
