@@ -59,6 +59,7 @@ jobs:
             --from-literal=SESSION_TOKEN=${{ secrets.SESSION_TOKEN }} \
             --from-literal=MERCADO_PAGO_TOKEN=${{ secrets.MERCADO_PAGO_TOKEN }} \
             --from-literal=MERCADO_PAGO_EXTERNAL_POS_ID=${{ secrets.MERCADO_PAGO_EXTERNAL_POS_ID }} \
+            --from-literal=MERCADO_PAGO_USER_ID=${{ secrets.MERCADO_PAGO_USER_ID }}
             --from-literal=MONGO_HOST=${{ secrets.MONGO_HOST }}
  
       - name: Kube Apply
