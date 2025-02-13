@@ -1,6 +1,6 @@
 import { PaymentNotificationDto } from '@Application/dtos/request/payment/payment-notification.request.dto';
 import { PaymentRequestDto } from '@Application/dtos/request/payment/payment.request.dto';
-import { CheckoutResponseDto } from '@Application/dtos/response/payment/checkout.response';
+import { CheckoutResponseDto } from '@Application/dtos/response/payment/checkout.response.dto';
 import { MerchantOrderResponseDto } from '@Application/dtos/response/payment/merchant-order.response.dto';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';

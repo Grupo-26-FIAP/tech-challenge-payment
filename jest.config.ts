@@ -16,9 +16,12 @@ const config: Config.InitialOptions = {
   coverageDirectory: './coverage',
   testEnvironment: 'node',
   moduleNameMapper: {
+    '^@Application/(.*)$': '<rootDir>/src/application/$1',
     '^@Domain/(.*)$': '<rootDir>/src/domain/$1',
     '^@Infrastructure/(.*)$': '<rootDir>/src/infrastructure/$1',
-    '^@Application/(.*)$': '<rootDir>/src/application/$1',
+    '^@Presentation/(.*)$': '<rootDir>/src/presentation/$1',
+    '^@Shared/(.*)$': '<rootDir>/src/shared/$1',
+    '^@Test/(.*)$': '<rootDir>/test/$1',
   },
   collectCoverageFrom: [
     './src/**/*.(t|j)s',
@@ -35,6 +38,7 @@ const config: Config.InitialOptions = {
     '!./src/**/*dto*.(t|j)s',
     '!./src/**/*constant*.(t|j)s',
     '!./src/**/*mapper*.(t|j)s',
+    '!./src/**/*event*.(t|j)s',
   ],
   coveragePathIgnorePatterns: ['/src/shared/'],
   coverageReporters: ['html', 'text'],

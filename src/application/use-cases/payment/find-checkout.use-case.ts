@@ -10,6 +10,6 @@ export class FindCheckoutUseCase {
   ) {}
 
   async execute(orderId: number): Promise<CheckoutOrder> {
-    return await this.checkoutOrderService.find(orderId);
+    return this.checkoutOrderService.find(orderId);
   }
 }

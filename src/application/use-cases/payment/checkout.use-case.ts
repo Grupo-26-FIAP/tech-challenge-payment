@@ -1,5 +1,5 @@
 import { OrderResponseDto } from '@Application/dtos/response/order/order.response.dto';
-import { CheckoutResponseDto } from '@Application/dtos/response/payment/checkout.response';
+import { CheckoutResponseDto } from '@Application/dtos/response/payment/checkout.response.dto';
 import { PaymentMapper } from '@Application/mappers/payment.mapper';
 import { CheckoutOrderService } from '@Domain/services/checkout.service.impl';
 import { IPaymentService } from '@Domain/services/payment.service';
