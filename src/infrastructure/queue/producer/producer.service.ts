@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 @Injectable()
 export class MessageProducer {
   constructor(private readonly sqsService: SqsService) {}
+
   async sendMessage(queue: string, body: any) {
     const message: any = JSON.stringify(body);
 

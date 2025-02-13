@@ -5,11 +5,11 @@ import { HealthCheck, HealthCheckService } from '@nestjs/terminus';
 @Controller('/health')
 @ApiTags('HealthCheck')
 export class HealthController {
-  constructor(private health: HealthCheckService) {}
+  constructor(private readonly health: HealthCheckService) {}
 
   @Get()
   @HealthCheck()
-  check() {
+  async check() {
     return this.health.check([]);
   }
 }

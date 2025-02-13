@@ -14,11 +14,12 @@ export class PaymentNotificationUseCase {
 
   async execute(payment: PaymentNotificationDto): Promise<void> {
     try {
-      this.validatePayment(payment);
+      await this.validatePayment(payment);
     } catch (error) {
       this.handleError(error);
     }
   }
+
   private async validatePayment(
     payment: PaymentNotificationDto,
   ): Promise<void> {

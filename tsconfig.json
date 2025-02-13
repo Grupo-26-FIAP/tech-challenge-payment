@@ -21,7 +21,9 @@
       "@Application/*": ["src/application/*"],
       "@Domain/*": ["src/domain/*"],
       "@Infrastructure/*": ["src/infrastructure/*"],
-      "@Shared/*": ["src/shared/*"]
+      "@Presentation/*": ["src/presentation/*"],
+      "@Shared/*": ["src/shared/*"],
+      "@Test/*": ["test/*"]
     }
   }
 }

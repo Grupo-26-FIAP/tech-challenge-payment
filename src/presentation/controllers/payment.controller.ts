@@ -34,7 +34,7 @@ export class PaymentController {
     description: 'Pagamento realizado com sucesso',
   })
   @ApiResponse({ status: 500, description: 'Erro interno do servidor' })
-  async create(@Body() dto: PaymentNotificationDto) {
-    this.paymentNotificationUseCase.execute(dto);
+  async create(@Body() dto: PaymentNotificationDto): Promise<void> {
+    await this.paymentNotificationUseCase.execute(dto);
   }
 }
