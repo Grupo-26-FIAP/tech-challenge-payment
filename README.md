@@ -123,6 +123,7 @@ O diagrama abaixo ilustra a estrutura das tabelas e suas relações:
 erDiagram
     collection_payments {
         int id
+        int order_id
         float transaction_amount
         float total_paid_amount
         float shipping_cost
