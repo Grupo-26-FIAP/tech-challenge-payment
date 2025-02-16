@@ -5,7 +5,7 @@ import {
 } from '@Application/dtos/request/payment/payment.request.dto';
 
 export const PAYMENT_NOTIFICATION_REQUEST_DTO_MOCK: PaymentNotificationDto = {
-  topic: 'topic',
+  topic: 'merchant_order',
   resource: 'resource',
 };
 

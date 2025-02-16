@@ -39,9 +39,10 @@ const config: Config.InitialOptions = {
     '!./src/**/*constant*.(t|j)s',
     '!./src/**/*mapper*.(t|j)s',
     '!./src/**/*event*.(t|j)s',
+    '!./src/**/*handler*.(t|j)s',
   ],
   coveragePathIgnorePatterns: ['/src/shared/'],
-  coverageReporters: ['html', 'text'],
+  coverageReporters: ['html', 'text', 'lcov'],
 };
 
 export default config;
