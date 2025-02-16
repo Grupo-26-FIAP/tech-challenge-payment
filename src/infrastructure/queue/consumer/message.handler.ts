@@ -3,15 +3,14 @@ import { CheckoutUseCase } from '@Application/use-cases/payment/checkout.use-cas
 import { Inject, Injectable } from '@nestjs/common';
 import { SqsMessageHandler } from '@ssut/nestjs-sqs';
 import * as AWS from 'aws-sdk';
-import * as dotenv from 'dotenv';
-dotenv.config();
 
 @Injectable()
 export class MessageHandler {
-  private sqs: AWS.SQS;
+  private readonly sqs: AWS.SQS;
+
   constructor(
     @Inject(CheckoutUseCase)
-    private readonly chackoutUseCase: CheckoutUseCase,
+    private readonly checkoutUseCase: CheckoutUseCase,
   ) {
     this.sqs = new AWS.SQS();
   }
@@ -22,7 +21,7 @@ export class MessageHandler {
 
     console.log('Message received', data);
 
-    this.chackoutUseCase.execute(data);
+    await this.checkoutUseCase.execute(data);
 
     await this.sqs
       .deleteMessage({
