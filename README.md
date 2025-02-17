@@ -1,191 +1,86 @@
-# Tech Challenge Payment
+# 💳 Tech Challenge - Payment
 
-**Pagamento**: O sistema deverá possuir uma opção de pagamento integrada para MVP. A forma de pagamento oferecida será via QRCode do Mercado Pago.
+Bem-vindo ao repositório do **Tech Challenge - Payment**! 🚀
 
+Este serviço é responsável pelo processamento de pagamentos dentro da arquitetura do **Tech Challenge**, garantindo segurança, rapidez e confiabilidade nas transações financeiras. 💰
 
-## Estrutura de Pastas
+## 📌 Funcionalidades
 
-Este documento descreve a estrutura de pastas da aplicação baseada na Clean Architecture. Essa organização visa garantir uma separação clara de responsabilidades entre as diferentes camadas do sistema, facilitando a manutenção e evolução da aplicação.
+✅ Processamento de pagamentos via diferentes métodos (cartão de crédito, PIX, boleto, etc.)  
+✅ Validação e autenticação de transações  
+✅ Integração com serviços financeiros externos  
+✅ Registro e consulta de pagamentos  
+✅ Suporte a estornos e cancelamentos  
 
-```
-src/
-├── domain/
-│   ├── entities/
-│   ├── value-objects/
-│   ├── services/
-│   └── repositories/
-│
-├── application/
-│   ├── use-cases/
-│   ├── dtos/
-│   └── mappers/
-│
-├── infrastructure/
-│   ├── orm/
-│   ├── repositories/
-│   └── config/
-│
-├── presentation/
-│   └── controllers/
-│
-└── main.ts
-```
+## 🏗️ Arquitetura
 
-## Descrição das Pastas e Arquivos
+O serviço de pagamento segue uma arquitetura baseada em microsserviços, utilizando **NestJS** para a API, **PostgreSQL** para persistência e integração com serviços externos para processamento de pagamentos.
 
-### `src/domain/`
+## 🚀 Tecnologias Utilizadas
 
-- **`entities/`**: Contém as entidades do domínio, que representam os modelos principais do sistema.
-- **`value-objects/`**: Contém os Objetos de Valor do domínio, que são objetos imutáveis utilizados em conjunto com as entidades.
-- **`services/`**: Contém serviços que implementam as regras de negócio puras do domínio, sem depender de detalhes de infraestrutura.
-- **`repositories/`**: Contém interfaces para repositórios, que são portas de saída para a persistência de dados.
+- **NestJS** - Framework para construção da API
+- **TypeScript** - Tipagem estática para JavaScript
+- **PostgreSQL** - Banco de dados relacional
+- **Docker** - Containerização da aplicação
+- **Jest** - Testes unitários e de integração
+- **RabbitMQ/Kafka** - Comunicação assíncrona entre serviços
 
-### `src/application/`
+## 📦 Como Executar o Projeto
 
-- **`use-cases/`**: Contém casos de uso da aplicação, que definem as operações específicas que a aplicação pode realizar e coordenam as interações entre entidades e serviços.
-- **`dtos/`**: Contém Data Transfer Objects, que são utilizados para transferir dados entre diferentes camadas da aplicação.
-- **`mappers/`**: Contém mapeamentos entre entidades e DTOs para facilitar a conversão de dados entre o formato de persistência e o formato de apresentação.
+### Pré-requisitos
 
-### `src/presentation/`
+- [Node.js](https://nodejs.org/) versão 16+
+- [Docker](https://www.docker.com/)
+- [PostgreSQL](https://www.postgresql.org/) instalado ou rodando em um container
 
-- **`controllers/`**: Contém adaptadores de entrada, como controladores HTTP, que recebem as requisições dos clientes e invocam os casos de uso apropriados.
+### Rodando o projeto
 
-### `src/infrastructure/`
+1. Clone este repositório:
+   ```sh
+   git clone https://github.com/Grupo-26-FIAP/tech-challenge-payment.git
+   ```
+2. Acesse a pasta do projeto:
+   ```sh
+   cd tech-challenge-payment
+   ```
+3. Instale as dependências:
+   ```sh
+   npm install
+   ```
+4. Configure as variáveis de ambiente (crie um arquivo `.env` baseado no `.env.example`).
+5. Execute a aplicação em modo de desenvolvimento:
+   ```sh
+   npm run start:dev
+   ```
 
-- **`typeorm/`**: Contém configurações e implementações específicas do ORM (TypeORM), como conexões com o banco de dados e definições de entidades.
-- **`repositories/`**: Contém a implementação concreta dos repositórios definidos no domínio.
-- **`services/`**: Contém serviços de infraestrutura que oferecem funcionalidades auxiliares para a aplicação, como serviços de cache ou de mensageria.
-- **`config/`**: Contém configurações da aplicação, como variáveis de ambiente e configurações específicas do sistema.
-
-### `src/shared/`
-
-- **`shared/`**: Contém código e configurações compartilhadas que são usadas em várias partes da aplicação, como utilitários comuns e configurações globais.
-
-### `src/main.ts`
-
-- **`main.ts`**: Ponto de entrada da aplicação. Configura e inicializa o módulo principal do NestJS e inicia o servidor.
-
-## Diagrama de Arquitetura Limpa
-
-O diagrama abaixo ilustra a interação entre as diferentes camadas e componentes da arquitetura limpa do projeto. Esta arquitetura é projetada para promover uma separação clara entre as diferentes responsabilidades do sistema, facilitando a manutenção e evolução da aplicação.
-
-```mermaid
-graph TD
-    subgraph Presentation
-        A[Controllers]
-    end
-
-    subgraph Application
-        A[Controllers] -->|Calls| B[Use Cases]
-        B[Use Cases] -->|Maps to/from| D[DTOs]
-        B -->|Interacts with| C[Application Services]
-    end
-
-    subgraph Domain
-        C -->|Uses| E[Entities]
-        C -->|Uses| F[Domain Services]
-        E -->|Persisted by| G[Repositories Interface]
-    end
-
-    subgraph Infrastructure
-        G -->|Implements| H[Infrastructure Repositories]
-        H -->|Configured in| I[ORM Config]
-        I -->|Uses| J[ORM Models]
-        I -->|Provides| K[ORM Repositories]
-        H -->|Seeded by| L[Seed Scripts]
-        M[External APIs] -->|Uses| C
-    end
-
-    %%% Optional styling to make the diagram clearer
-    classDef presentation fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef application fill:#f99,stroke:#333,stroke-width:2px;
-    classDef domain fill:#ccf,stroke:#333,stroke-width:2px;
-    classDef infra fill:#cfc,stroke:#333,stroke-width:2px;
-
-    class Presentation presentation;
-    class Application application;
-    class Domain domain;
-    class Infrastructure infra;
-
+### Executando com Docker
+```sh
+  docker-compose up
 ```
 
-## Documentação do Banco de Dados
-
-Este documento descreve a estrutura do banco de dados utilizado no projeto. Inclui a descrição de cada tabela, suas colunas e os relacionamentos entre elas.
-
-
-
-### Diagrama do Banco de Dados
-
-O diagrama abaixo ilustra a estrutura das tabelas e suas relações:
-
-```mermaid
-erDiagram
-    collection_payments {
-        int id
-        int order_id
-        float transaction_amount
-        float total_paid_amount
-        float shipping_cost
-        string currency_id
-        string status
-        string status_detail
-        string operation_type
-        datetime date_approved
-        datetime date_created
-        datetime last_modified
-        float amount_refunded
-    }
+## ✅ Testes
+Para rodar os testes unitários e de cobertura:
+```sh
+npm run test:cov
 ```
 
-### Detalhes Adicionais
+## 📄 Documentação da API
 
-- **Chave Primária (PK)**: Identificador único de cada registro na tabela.
-- **Chave Estrangeira (FK)**: Referência a registros em outras tabelas.
-- **Soft Delete**: Colunas `deleted_at` usadas para implementar exclusão lógica.
-
-## Como Executar o Projeto
-
-1. **Clone o repositório** (se ainda não o fez):
-
-```bash
-git clone https://github.com/Grupo-26-FIAP/tech-challenge-payment
-cd tech-challenge-payment
+A documentação da API pode ser acessada via Swagger após iniciar o projeto:
+```
+http://localhost:3000/api
 ```
 
-### Utilizando Docker
+## 🛠️ Contribuição
 
-Para executar o projeto utilizando Docker, siga os passos abaixo:
+Quer contribuir? Siga os passos:
+1. Faça um fork do repositório
+2. Crie uma branch com a sua feature: `git checkout -b minha-feature`
+3. Commit suas alterações: `git commit -m 'Adicionando nova feature'`
+4. Envie para o repositório remoto: `git push origin minha-feature`
+5. Abra um Pull Request 🚀
 
-1. **Certifique-se de que o Docker e o Docker Compose estão instalados**:
+## 📢 Contato
 
-   - [Docker](https://www.docker.com/get-started)
-   - [Docker Compose](https://docs.docker.com/compose/install/)
+Dúvidas ou sugestões? Entre em contato com a equipe do **Tech Challenge**! 😃
 
-2. **Inicie os Contêineres com Docker Compose**:
-
-Utilize o docker-compose.yml para iniciar a aplicação e os serviços dependentes (como o banco de dados):
-
-```bash
-docker compose up
-```
-
-Isso iniciará todos os serviços definidos no **docker-compose.yml**. Você verá os logs da aplicação no terminal.
-
-### **Acessando o Swagger**
-
-Após iniciar os contêineres, o Swagger estará acessível em [http://localhost:3000/docs](http://localhost:3000/docs) (ou a porta definida no docker-compose.yml).
-
-> ⚠️ **Atenção**
->
-> [Instruções de fluxo](https://github.com/Grupo-26-FIAP/.github/wiki/Fluxo-de-teste)
-
-## Contato (Grupo)
-
-Para dúvidas ou suporte, entre em contato com:
-
-- **RM357358** Jhoni Farias (jhonifarias.developer@gmail.com)
-- **RM357836** Josef Henrique Zambreti (josefhenrique@uol.com.br)
-- **RM357360** Lucas Rodrigues Medina Costa (lucasmedinarmc@gmail.com)
-- **RM358012** Kleber de Oliveira Andrade (pdjkleber@gmail.com)
-- **RM357235** Vitória Camila Xavier Sobrinho (vcamilaxs@gmail.com)
