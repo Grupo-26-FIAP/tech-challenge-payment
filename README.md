@@ -1,5 +1,12 @@
 # 💳 Tech Challenge - Payment
 
+![Badge](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
+![Badge](https://img.shields.io/badge/Contributors-Grupo%2026-blue)
+![Badge](https://img.shields.io/badge/License-MIT-green)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Grupo-26-FIAP_tech-challenge-payment&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Grupo-26-FIAP_tech-challenge-payment)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Grupo-26-FIAP_tech-challenge-payment&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Grupo-26-FIAP_tech-challenge-payment)
+
+
 Bem-vindo ao repositório do **Tech Challenge - Payment**! 🚀
 
 Este serviço é responsável pelo processamento de pagamentos dentro da arquitetura do **Tech Challenge**, garantindo segurança, rapidez e confiabilidade nas transações financeiras. 💰
