@@ -9,6 +9,7 @@ import { ProducerModule } from '@Infrastructure/queue/producer/producer.module';
 import { MercadoPagoServiceImpl } from '@Infrastructure/services/mercadopago/mercadopago.service.impl';
 import { MongoConfigService } from '@Infrastructure/typeorm/config/mongo.config.service';
 import { CheckoutOrder } from '@Infrastructure/typeorm/models/checkout.model';
+import { HealthController } from '@Presentation/controllers/health.controller';
 import { EnvironmentVariableModule } from '@Shared/config/environment-variable/environment-variable.module';
 import { ResponseMiddleware } from '@Shared/middlewares/response.middleware';
 import { HttpModule } from '@nestjs/axios';
@@ -30,7 +31,7 @@ import { PaymentController } from './presentation/controllers/payment.controller
     ProducerModule,
     ConsumerModule,
   ],
-  controllers: [PaymentController],
+  controllers: [HealthController, PaymentController],
   providers: [
     PaymentNotificationUseCase,
     CheckoutUseCase,
